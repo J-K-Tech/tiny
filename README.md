@@ -26,6 +26,11 @@ main.cpp
 -lstdc++
 ;output
 -o tiny.exe
+
+;end command
+\n
+;run tiny
+tiny.exe
 ```
 
 # WARNING, THIS PROGRAM HAS STRICT SYNTAX AND IS YET TO IMPROVE
