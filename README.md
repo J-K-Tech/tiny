@@ -4,11 +4,13 @@ A tiny command line interpreter for organizing, you can split huge single line c
 
 ## Features
 
-Multi-command: You can make multiple commands in same `.tmk` file by having a line that starts with `\n` (all written in this line after the `\n.` will be ignored)
+Multi-command: You can make multiple commands in same `.tmk` file by having a line that starts with `\n` 
 
 Comments: You can use comments in the file to your peers or future you remember what you done, also useful to separate sections of a command
 
 Variables: If a line starts with `%` it will get all the name of it until hit the second `%` and to set variables the line has to start with `set`
+
+(all written in this line after the `\n`,`set var=thing` and `%var%` will be ignored)
 
 ## example
 
