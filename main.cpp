@@ -5,10 +5,26 @@
 std::string get(std::string);
 std::map<std::string,std::string> variables;
 
+#define CALL ""
+#ifdef _WIN32
+#undef CALL
+#define CALL "call"
+#endif
+
+#ifdef linux
+#undef CALL
+#define CALL "exec"
+#endif
+
+#ifdef __APPLE__
+#undef CALL
+#define CALL "exec"
+#endif
+
 int call(
     std::string lines){
     std::string com;
-    com.append("call");
+    com.append(CALL);
     
     printf("command:%s\n\nexecuting\n\n\n",lines.c_str());
     com.append(lines.c_str());
