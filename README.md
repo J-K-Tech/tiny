@@ -35,7 +35,7 @@ main.cpp
 tiny.exe
 ```
 
-# WARNING, THIS PROGRAM HAS STRICT SYNTAX AND IS YET TO IMPROVE
+# WARNING, THIS PROGRAM HAS STRICT SYNTAX
 ## The line MUST to have `;`,`set` and `%` as first character to be detected as comment, setter and variable, so you can have it in the command (without being interpreted by Tiny) by adding a space before.
 
 
