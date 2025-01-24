@@ -4,6 +4,7 @@
 #include <map>
 std::string get(std::string);
 std::map<std::string,std::string> variables;
+std::map<std::string,int> functions;
 
 #define CALL ""
 #ifdef _WIN32
@@ -20,48 +21,63 @@ std::map<std::string,std::string> variables;
 #undef CALL
 #define CALL "exec"
 #endif
-
+#include "term.h"
 int call(
     std::string lines){
     std::string com;
     com.append(CALL);
     
-    printf("command:%s\n\nexecuting\n\n\n",lines.c_str());
+    success("command:%s\nexecuting\n\n",lines.c_str());
     com.append(lines.c_str());
 
     system(com.c_str());
-    printf("\n\n\n");
+    success("\n\n");
     return 0;
 }
-
+ErrorLevel level(1);
 int set(std::string setter){
     std::string name=setter.substr(setter.find_first_of(" ")+1,setter.find("=")-4);
     std::string value=setter.substr(setter.find("=")+1);
-    variables[name.c_str()]=value.c_str();
-    printf("key %s set as value %s\n\n",name.c_str(),value.c_str());
-    //printf("\nvar: %s\n",variables[name].c_str());
+    variables[name]=value;
+    warning("key %s set as value %s\n\n",name.c_str(),value.c_str());
+    //success("\nvar: %s\n",variables[name].c_str());
+    return 0;
 }
 
+int fn(std::string setter,int pos){
+    std::string name=setter.substr(setter.find_first_of(":")+1);
+    functions[name]=pos;
+    warning("function %s set in position %i\n\n",name.c_str(),pos);
+    //success("\nvar: %s\n",variables[name].c_str());
+    return 0;
+}
 std::string get(std::string key){
     std::string k=key.substr(key.find_first_of('%')+1,key.find_last_of('%')-1);
     std::string var=variables[k];
     if (var==""){
-        printf("\ncould not get variable with key \"%s\"\n",k.c_str());
+        error("\ncould not get variable with key \"%s\"\n",k.c_str());
         exit(1);
     }
-    //printf("\ngetting variable \"%s\" with key \"%s\"\n",var.c_str(),k.c_str());
+    //success("\ngetting variable \"%s\" with key \"%s\"\n",var.c_str(),k.c_str());
     return var;
 }
 
 int main(int argc, char *argv[]){
 
-    printf("tiny runner v0.5\n\n\n");
+    for (int i=2;i<argc;i++){
+        if (argv[i][0]=='-'&&argv[i][1]=='w'){i++;
+            level= std::stoi(argv[i]);
+        }else{
+        std::string key="set ";
+        key.append(std::to_string(i-2)).append("=").append(argv[i]);
+        set(key);
+    }}
+    warning("tiny runner v0.8\n\n\n");
     std::fstream fileStream;
     fileStream.open(argv[1]);
     if (!fileStream.fail()){
     std::ifstream infile(argv[1]);
     std::string line;
-
     std::string lines;
     int mode=-1;
     while (std::getline(infile, line))
@@ -94,7 +110,8 @@ int main(int argc, char *argv[]){
 
                 }
                 break;
-                
+            case ':':
+                fn(line, infile.cur);
                 /* code */
             
             default:
@@ -107,6 +124,6 @@ int main(int argc, char *argv[]){
     call(lines);
     return 0;
     }
-    printf("could not locate file %s",argv[1]);
+    error("could not locate file %s",argv[1]);
     return 1;
 }
