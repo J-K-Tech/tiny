@@ -62,6 +62,7 @@ std::string get(std::string key){
     return var;
 }
 
+#define A lines.append
 int main(int argc, char *argv[]){
 
     for (int i=2;i<argc;i++){
@@ -80,20 +81,22 @@ int main(int argc, char *argv[]){
     std::string line;
     std::string lines;
     int mode=-1;
+    bool infunc=false;
     while (std::getline(infile, line))
     {
         const char * l=line.c_str();
+        error((char *)l);
         if (line.length()!=0){
             switch (l[0])
             {
             case '\\':
                 if (l[1]=='n'){
                     call(lines);
-                    lines.clear();
-                    break;}
+                    lines.clear();}
                 else{
-                    lines.append(" "+line);
+                    A(++l);
                 }
+                break;
             case '%':
                 lines.append(get(line));
                 break;
@@ -106,7 +109,7 @@ int main(int argc, char *argv[]){
                             lines.clear();
                             set(line);}
                 else{
-                lines.append(" "+line);
+                A(" "+line);
 
                 }
                 break;
@@ -115,7 +118,7 @@ int main(int argc, char *argv[]){
                 /* code */
             
             default:
-                lines.append(" "+line);
+                A(" "+line);
                 break;
             }
         }
