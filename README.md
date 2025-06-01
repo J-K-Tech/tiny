@@ -10,7 +10,9 @@ Comments: You can use comments in the file to your peers or future you remember 
 
 Variables: If a line starts with `%` it will get all the name of it until hit the second `%` and to set variables the line has to start with `set`
 
-(all written in this line after the `\n`,`set var=thing` and `%var%` will be ignored)
+Ignore space: Add `\` at the start of the line so it will not add an space before it.
+
+(all written in this line after the `\n` and `%var%` will be ignored and be seen as comments)
 
 ## example
 
@@ -26,6 +28,11 @@ main.cpp
 
 ;includes
 -lstdc++
+
+-I/usr/
+;to not add space between /usr/ and include, you add \ so it will be "/usr/include" and not "/usr/ include"
+\include
+
 ;output
 -o tiny.exe
 
