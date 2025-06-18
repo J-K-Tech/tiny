@@ -1,11 +1,11 @@
-Maintainer=kinfuyuki
+maintainer=kinfuyuki
 pkgname=tiny
 pkgver=1.0
 pkgrel=1
 pkgdesc="tiny script runner"
 arch=('any')
 url="https://crystalsoft.neocities.org"
-license=('AGPL3')
+license=('AGPLv3')
 makedepends=('gcc')
 options=('!debug')
 source=("https://github.com/J-K-Tech/${pkgname}/archive/refs/tags/${pkgver}.tar.gz")
