@@ -2,3 +2,6 @@ a.exe
 test.tmk
 tiny
 tiny.tmk
+a.out
+.gitignore
+build.tmk
