@@ -6,3 +6,4 @@ out
 tiny
 src
 *.tar.gz
+*.out
