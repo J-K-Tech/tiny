@@ -5,5 +5,6 @@ out
 *.exe
 tiny
 src
-*.tar.gz
+*.tar*
 *.out
+pkg
