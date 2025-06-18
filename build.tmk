@@ -1,0 +1,20 @@
+
+clang++ term.cpp main.cpp -m32 --target=i686-w64-mingw32-gcc -O3 -o tiny9x.exe -Wl,--major-subsystem-version=4,--minor-subsystem-version=0
+
+\n
+clang++ term.cpp main.cpp -m32 --target=i686-w64-mingw32-gcc -O3 -o tiny2k.exe -Wl,--major-subsystem-version=5,--minor-subsystem-version=0
+
+\n
+clang++ term.cpp main.cpp -m64 --target=x86_64-w64-mingw32-gcc -O3 -o tinyxp64.exe -Wl,--major-subsystem-version=5,--minor-subsystem-version=1
+
+\n
+clang++ term.cpp main.cpp -m64 --target=x86_64-w64-mingw32-gcc -O3 -o tiny.exe -Wl,--major-subsystem-version=10,--minor-subsystem-version=1
+
+\n
+clang++ term.cpp main.cpp -O3 -o tiny
+
+\n
+clang++ term.cpp main.cpp -m32 -O3 -o tiny32
+
+\n
+;djgpp term.cpp main.cpp -O3 -o tiny32
